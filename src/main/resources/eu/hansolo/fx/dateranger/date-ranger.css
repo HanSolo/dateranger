@@ -1,0 +1,43 @@
+.date-ranger {
+    -weekday-fill        : white;
+    -weekday-text-fill   : black;
+    -saturday-fill       : rgb(255, 100, 0);
+    -saturday-text-fill  : black;
+    -saturday-font-weight: 500;
+    -sunday-fill         : rgb(255, 0, 0);
+    -sunday-text-fill    : black;
+    -sunday-font-weight  : 500;
+    -today-fill          : lightgray;
+    -today-text-fill     : magenta;
+    -today-font-weight   : 500;
+}
+
+.date-ranger .date-label {
+    -fx-background-color: -weekday-fill;
+    -fx-text-fill       : -weekday-text-fill;
+}
+.date-ranger .date-label:today {
+    -fx-background-color: -today-fill;
+    -fx-text-fill       : -today-text-fill;
+    -fx-font-weight     : 500;
+}
+.date-ranger .date-label:saturday {
+    -fx-background-color: -saturday-fill;
+    -fx-text-fill       : -saturday-text-fill;
+    -fx-font-weight     : 500;
+}
+.date-ranger .date-label:saturday:today {
+    -fx-background-color: -weekend-fill;
+    -fx-text-fill       : -today-text-fill;
+    -fx-font-weight     : 500;
+}
+.date-ranger .date-label:sunday {
+    -fx-background-color: -sunday-fill;
+    -fx-text-fill       : -sunday-text-fill;
+    -fx-font-weight     : 500;
+}
+.date-ranger .date-label:sunday:today {
+    -fx-background-color: -sunday-fill;
+    -fx-text-fill       : -today-text-fill;
+    -fx-font-weight     : 500;
+}
