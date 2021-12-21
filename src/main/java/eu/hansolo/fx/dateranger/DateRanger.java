@@ -2,28 +2,19 @@ package eu.hansolo.fx.dateranger;
 
 import eu.hansolo.fx.dateranger.Records.DateCell;
 import javafx.beans.DefaultProperty;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.BooleanPropertyBase;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.IntegerPropertyBase;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.collections.ObservableList;
-import javafx.css.PseudoClass;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.time.DayOfWeek;
@@ -59,12 +50,16 @@ public class DateRanger extends Region {
     private              double                     width;
     private              double                     height;
     private              GridPane                   pane;
-    private              ObjectProperty<Locale>     locale;
-    private              IntegerProperty            currentYear;
-    private              ObjectProperty<Month>      currentMonth;
     private              Map<Month, List<DateCell>> cellMap;
     private              List<ColumnConstraints>    columnConstraints;
     private              List<RowConstraints>       rowConstraints;
+    private              ObjectProperty<Locale>     locale;
+    private              IntegerProperty            currentYear;
+    private              ObjectProperty<Month>      currentMonth;
+    private              ObjectProperty<LocalDate>  selectedDate;
+    private              ObjectProperty<LocalDate>  startDate;
+    private              ObjectProperty<LocalDate>  endDate;
+
 
 
     // ******************** Constructors **************************************
@@ -84,6 +79,21 @@ public class DateRanger extends Region {
             @Override protected void invalidated() { redraw(); }
             @Override public Object getBean() { return DateRanger.this; }
             @Override public String getName() { return "currentMonth"; }
+        };
+        selectedDate  = new ObjectPropertyBase<>(now) {
+            @Override protected void invalidated() { redraw(); }
+            @Override public Object getBean() { return DateRanger.this; }
+            @Override public String getName() { return "selectedDate"; }
+        };
+        startDate     = new ObjectPropertyBase<>() {
+            @Override protected void invalidated() { redraw(); }
+            @Override public Object getBean() { return DateRanger.this; }
+            @Override public String getName() { return "startDate"; }
+        };
+        endDate       = new ObjectPropertyBase<>() {
+            @Override protected void invalidated() { redraw(); }
+            @Override public Object getBean() { return DateRanger.this; }
+            @Override public String getName() { return "endDate"; }
         };
 
         cellMap = new ConcurrentHashMap<>();
@@ -160,6 +170,18 @@ public class DateRanger extends Region {
     public void setCurrentMonth(final Month month) { currentMonth.set(month); }
     public ObjectProperty<Month> currentMonthProperty() { return currentMonth; }
 
+    public LocalDate getSelectedDate() { return selectedDate.get(); }
+    public void setSelectedDate(final LocalDate selectedDate) { this.selectedDate.set(selectedDate); }
+    public ObjectProperty<LocalDate> selectedDateProperty() { return selectedDate; }
+
+    public LocalDate getStartDate() { return startDate.get(); }
+    public void setStartDate(final LocalDate startDate) { this.startDate.set(startDate); }
+    public ObjectProperty<LocalDate> startDateProperty() { return startDate; }
+
+    public LocalDate getEndDate() { return endDate.get(); }
+    public void setEndDate(final LocalDate endDate) { this.endDate.set(endDate); }
+    public ObjectProperty<LocalDate> endDateProperty() { return endDate; }
+
     private void updateCells() {
         for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
             Optional<Node> optNode = getCellAt(dayOfWeek.getValue(), 0);
@@ -178,7 +200,7 @@ public class DateRanger extends Region {
             for (int i = 1 ; i <= noOfDays ; i++) {
                 DayOfWeek dayOfWeek = date.getDayOfWeek();
                 if (dayOfWeek == DayOfWeek.MONDAY) { y++; }
-                DateCell  dateCell  = new DateCell(date, dayOfWeek.getValue(), y);
+                DateCell dateCell = new DateCell(date, dayOfWeek.getValue(), y);
                 cellMap.get(month).add(dateCell);
                 date = date.plusDays(1);
             }
@@ -226,8 +248,12 @@ public class DateRanger extends Region {
     }
 
     private void redraw() {
-        final LocalDate now = LocalDate.now();
-        final List<DateCell> cells = cellMap.get(currentMonth.get());
+        final LocalDate      now          = LocalDate.now();
+        final LocalDate      startDate    = getStartDate();
+        final LocalDate      endDate      = getEndDate();
+        final boolean        isRange      = (null != startDate && null != endDate);
+        final LocalDate      selectedDate = getSelectedDate();
+        final List<DateCell> cells        = cellMap.get(currentMonth.get());
         cells.forEach(cell -> {
             Optional<Node> optNode = getCellAt(cell.x(), cell.y());
             if (optNode.isPresent()) {
@@ -235,6 +261,10 @@ public class DateRanger extends Region {
                 dateLabel.setSaturday(cell.getDayOfWeek().equals(DayOfWeek.SATURDAY));
                 dateLabel.setSunday(cell.getDayOfWeek().equals(DayOfWeek.SUNDAY));
                 dateLabel.setToday(cell.date().isEqual(now));
+                if (null != startDate) { dateLabel.setStart(startDate.isEqual(cell.date())); }
+                if (null != endDate)   { dateLabel.setEnd(endDate.isEqual(cell.date())); }
+                if (isRange) { dateLabel.setRange(!cell.date().isBefore(startDate) && !cell.date().isAfter(endDate)); }
+                dateLabel.setSelected(selectedDate.isEqual(cell.date()));
                 dateLabel.setText(Integer.toString(cell.getDayOfMonth()));
             }
         });

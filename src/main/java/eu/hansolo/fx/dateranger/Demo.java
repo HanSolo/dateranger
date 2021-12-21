@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.Locale;
 
 
@@ -23,6 +24,9 @@ public class Demo extends Application {
     @Override public void init() {
         dateRanger = new DateRanger();
         //dateRanger.setLocale(Locale.GERMAN);
+        dateRanger.setSelectedDate(LocalDate.now().minusDays(5));
+        dateRanger.setStartDate(LocalDate.now().minusDays(2));
+        dateRanger.setEndDate(LocalDate.now().plusDays(2));
     }
 
     private void initOnFxApplicationThread(final Stage stage) {
