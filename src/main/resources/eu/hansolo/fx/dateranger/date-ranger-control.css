@@ -1,0 +1,49 @@
+.date-ranger-control {
+    -background-fill: rgb(22, 26, 26);
+
+    /* Header */
+    -header-text-fill   : rgb(159, 161, 161);
+    -fx-background-color: -background-fill;
+
+    /* Header Today Button */
+    -today-border   : transparent;
+    -today-fill     : rgb(92, 164, 246);
+    -today-text-fill: rgb(159, 161, 161);
+}
+
+
+/* Header */
+.date-ranger-control .header {
+    -fx-padding  : 0 0 0 5;
+    -fx-text-fill: -header-text-fill;
+}
+
+/* Header Button */
+.date-ranger-control .header-button {
+    -fx-alignment        : center;
+    -fx-padding          : 0 5 0 5;
+    -fx-text-fill        : -header-text-fill;
+    -fx-border-insets    : 0;
+    -fx-border-radius    : 0;
+    -fx-border-color     : transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color : transparent;
+}
+.date-ranger-control .header-button:hover {
+    -fx-text-fill: derive(-header-text-fill, 50%);
+}
+
+.date-ranger-control .header-today-button {
+    -fx-padding          : 5;
+    -fx-border-radius    : 10;
+    -fx-border-style     : none;
+    -fx-border-color     : -today-border;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0, 3;
+    -fx-background-color : -today-fill, -background-fill;
+    -fx-text-fill        : -today-text-fill;
+}
+.date-ranger-control .header-today-button:hover {
+    -fx-text-fill: derive(-today-text-fill, 50%);
+}

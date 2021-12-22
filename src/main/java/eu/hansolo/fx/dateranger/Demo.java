@@ -18,15 +18,15 @@ import java.util.Locale;
 
 
 public class Demo extends Application {
-    private DateRanger dateRanger;
-
+    private DateRanger        dateRanger;
+    private DateRangerControl dateRangerControl;
 
     @Override public void init() {
-        dateRanger = new DateRanger();
-        //dateRanger.setLocale(Locale.GERMAN);
-        dateRanger.setSelectedDate(LocalDate.now().minusDays(5));
-        dateRanger.setStartDate(LocalDate.now().minusDays(2));
-        dateRanger.setEndDate(LocalDate.now().plusDays(2));
+        dateRanger = DateRangerBuilder.create()
+                                      .locale(Locale.GERMAN)
+                                      .build();
+
+        dateRangerControl = new DateRangerControl(dateRanger);
     }
 
     private void initOnFxApplicationThread(final Stage stage) {
@@ -41,9 +41,9 @@ public class Demo extends Application {
     @Override public void start(final Stage stage) {
         initOnFxApplicationThread(stage);
 
-        StackPane pane = new StackPane(dateRanger);
+        StackPane pane = new StackPane(dateRangerControl);
         pane.setPrefSize(400, 400);
-        pane.setPadding(new Insets(10));
+        //pane.setPadding(new Insets(10));
 
         Scene scene = new Scene(pane);
 

@@ -1,136 +1,235 @@
 .date-ranger {
+    /* Main component styles */
+    -background-fill       : rgb(22, 26, 26);
+
+    /* Day of week styles*/
+    -day-of-week-border    : rgb(159, 161, 161);
+    -day-of-week-fill      : transparent;
+    -day-of-week-text-fill : rgb(159, 161, 161);
+    /* Week of year styles */
+    -week-of-year-border   : rgb(159, 161, 161);
+    -week-of-year-fill     : transparent;
+    -week-of-year-text-fill: rgb(159, 161, 161);
     /* Weekday styles */
-    -weekday-border       : transparent;
-    -weekday-fill         : transparent;
-    -weekday-text-fill    : black;
+    -weekday-border        : transparent;
+    -weekday-fill          : transparent;
+    -weekday-text-fill     : white;
     /* Saturday styles */
-    -saturday-border      : transparent;
-    -saturday-fill        : transparent;
-    -saturday-text-fill   : red;
-    -saturday-font-weight : 500;
+    -saturday-border       : transparent;
+    -saturday-fill         : transparent;
+    -saturday-text-fill    : rgb(159, 161, 161);
     /* Sunday styles */
-    -sunday-border        : transparent;
-    -sunday-fill          : transparent;
-    -sunday-text-fill     : red;
-    -sunday-font-weight   : 500;
+    -sunday-border         : transparent;
+    -sunday-fill           : transparent;
+    -sunday-text-fill      : rgb(159, 161, 161);
     /* Today styles */
-    -today-border         : transparent;
-    -today-fill           : lightgray;
-    -today-text-fill      : magenta;
-    -today-font-weight    : 500;
+    -today-border          : transparent;
+    -today-fill            : transparent;
+    -today-text-fill       : rgb(92, 164, 246);
     /* Selected date styles */
-    -selected-border      : black;
-    -selected-fill        : rgb(0, 150, 255);
-    -selected-text-fill   : black;
-    -selected-font-weight : 500;
+    -selected-border       : transparent;
+    -selected-fill         : rgb(92, 164, 246);
+    -selected-text-fill    : white;
     /* Start date styles */
-    -start-border         : transparent;
-    -start-fill           : rgb(230, 150, 0);
-    -start-text-fill      : black;
-    -start-font-weight    : 500;
+    -start-border          : rgba(255, 127, 2);
+    -start-fill            : rgba(255, 127, 2, 0.35);
+    -start-text-fill       : white;
     /* Range styles */
-    -range-border         : transparent;
-    -range-fill           : rgb(230, 150, 0);
-    -range-text-fill      : black;
-    -range-font-weight    : 500;
+    -range-border          : rgba(255, 127, 2);
+    -range-fill            : rgba(255, 127, 2, 0.35);
+    -range-text-fill       : white;
     /* End date styles */
-    -end-border           : transparent;
-    -end-fill             : rgb(230, 150, 0);
-    -end-text-fill        : black;
-    -end-font-weight      : 500;
+    -end-border            : rgba(255, 127, 2);
+    -end-fill              : rgba(255, 127, 2, 0.35);
+    -end-text-fill         : white;
+
+    /* Background color */
+    -fx-background-color: -background-fill;
 }
 
+
+/* Day of week */
+.date-ranger .day-of-week {
+    -fx-border-color    : -day-of-week-border;
+    -fx-border-style    : none none none none;
+    -fx-border-width    : 0 0 0 0;
+    -fx-background-color: -day-of-week-fill;
+    -fx-text-fill       : -day-of-week-text-fill;
+    -fx-alignment       : center;
+}
+.date-ranger .day-of-week:today {
+    -fx-border-color    : -day-of-week-border;
+    -fx-border-style    : none none none none;
+    -fx-border-width    : 0 0 0 0;
+    -fx-background-color: -day-of-week-fill;
+    -fx-text-fill       : -today-text-fill;
+    -fx-alignment       : center;
+}
+
+/* Week of year */
+.date-ranger .week-of-year {
+    -fx-border-color    : -week-of-year-border;
+    -fx-border-style    : none solid none none;
+    -fx-border-width    : 0 1 0 0;
+    -fx-background-color: -week-of-year-fill;
+    -fx-text-fill       : -week-of-year-text-fill;
+    -fx-alignment       : center-right;
+    -fx-padding         : 0 3 0 0;
+}
+.date-ranger .week-of-year:today {
+    -fx-border-color    : -week-of-year-border;
+    -fx-border-style    : none solid none none;
+    -fx-border-width    : 0 1 0 0;
+    -fx-background-color: -week-of-year-fill;
+    -fx-text-fill       : -today-text-fill;
+    -fx-alignment       : center-right;
+    -fx-padding         : 0 3 0 0;
+}
+
+/* Weekday */
 .date-ranger .date-label {
     -fx-border-color    : -weekday-border;
     -fx-background-color: -weekday-fill;
     -fx-text-fill       : -weekday-text-fill;
+    -fx-alignment       : center;
 }
+
+/* Today */
 .date-ranger .date-label:today {
     -fx-border-color    : -today-border;
     -fx-background-color: -today-fill;
     -fx-text-fill       : -today-text-fill;
     -fx-font-weight     : 500;
+    -fx-alignment       : center;
 }
+
+/* Saturday */
 .date-ranger .date-label:saturday {
     -fx-border-color    : -saturday-border;
     -fx-background-color: -saturday-fill;
     -fx-text-fill       : -saturday-text-fill;
     -fx-font-weight     : 500;
+    -fx-alignment       : center;
 }
 .date-ranger .date-label:saturday:today {
     -fx-border-color    : -today-border;
     -fx-background-color: -weekend-fill;
     -fx-text-fill       : -today-text-fill;
     -fx-font-weight     : 500;
+    -fx-alignment       : center;
 }
+
+/* Sunday */
 .date-ranger .date-label:sunday {
     -fx-border-color    : -sunday-border;
     -fx-background-color: -sunday-fill;
     -fx-text-fill       : -sunday-text-fill;
     -fx-font-weight     : 500;
+    -fx-alignment       : center;
 }
 .date-ranger .date-label:sunday:today {
     -fx-border-color    : -today-border;
     -fx-background-color: -sunday-fill;
     -fx-text-fill       : -today-text-fill;
     -fx-font-weight     : 500;
+    -fx-alignment       : center;
 }
 
+/* Range start */
 .date-ranger .date-label:start,
 .date-ranger .date-label:range:start {
+    -fx-border-style     : solid none solid solid;
+    -fx-border-insets    : 2 0 2 2;
+    -fx-border-radius    : 64 0 0 64;
     -fx-border-color     : -start-border;
+    -fx-background-insets: 2 0 2 2;
+    -fx-background-radius: 64 0 0 64;
     -fx-background-color : -start-fill;
     -fx-text-fill        : -start-text-fill;
     -fx-font-weight      : 500;
-    -fx-background-radius: 64 0 0 64;
+    -fx-alignment        : center;
 }
 .date-ranger .date-label:start:today,
 .date-ranger .date-label:range:start:today {
+    -fx-border-style     : solid none solid solid;
+    -fx-border-insets    : 2 0 2 2;
+    -fx-border-radius    : 64 0 0 64;
     -fx-border-color     : -start-border;
+    -fx-background-insets: 2 0 2 2;
+    -fx-background-radius: 64 0 0 64;
     -fx-background-color : -today-fill;
     -fx-text-fill        : -today-text-fill;
     -fx-font-weight      : 500;
-    -fx-background-radius: 64 0 0 64;
+    -fx-alignment        : center;
 }
+
+/* Range */
 .date-ranger .date-label:range {
-    -fx-border-color    : -range-border;
-    -fx-background-color: -range-fill;
-    -fx-text-fill       : -range-text-fill;
-    -fx-font-weight     : 500;
+    -fx-border-style     : solid none solid none;
+    -fx-border-insets    : 2 0 2 0;
+    -fx-border-color     : -range-border;
+    -fx-background-insets: 2 0 2 0;
+    -fx-background-color : -range-fill;
+    -fx-text-fill        : -range-text-fill;
+    -fx-font-weight      : 500;
+    -fx-alignment        : center;
 }
 .date-ranger .date-label:range:today {
-    -fx-border-color    : -range-border;
-    -fx-background-color: -today-fill;
-    -fx-text-fill       : -today-text-fill;
-    -fx-font-weight     : 500;
+    -fx-border-style     : solid none solid none;
+    -fx-border-insets    : 2 0 2 0;
+    -fx-border-color     : -range-border;
+    -fx-background-insets: 2 0 2 0;
+    -fx-background-color : -range-fill;
+    -fx-text-fill        : -today-text-fill;
+    -fx-font-weight      : 500;
+    -fx-alignment        : center;
 }
+
+/* Range end */
 .date-ranger .date-label:end,
-.date-ranger .date-label:range:end {
+.date-ranger .date-label:range:end,
+.date-ranger .date-label:range:end:selected {
+    -fx-border-style     : solid solid solid none;
+    -fx-border-insets    : 2 2 2 0;
+    -fx-border-radius    : 0 64 64 0;
     -fx-border-color     : -end-border;
+    -fx-background-insets: 2 2 2 0;
+    -fx-background-radius: 0 64 64 0;
     -fx-background-color : -end-fill;
     -fx-text-fill        : -end-text-fill;
     -fx-font-weight      : 500;
-    -fx-background-radius: 0 64 64 0;
+    -fx-alignment        : center;
 }
 .date-ranger .date-label:end:today,
 .date-ranger .date-label:range:end:today {
+    -fx-border-style     : solid solid solid none;
+    -fx-border-insets    : 2 2 2 0;
+    -fx-border-radius    : 0 64 64 0;
     -fx-border-color     : -end-border;
+    -fx-background-insets: 2 2 2 0;
+    -fx-background-radius: 0 64 64 0;
     -fx-background-color : -today-fill;
     -fx-text-fill        : -today-text-fill;
     -fx-font-weight      : 500;
-    -fx-background-radius: 0 64 64 0;
+    -fx-alignment        : center;
 }
 
-
-
+/* Selected date */
 .date-ranger .date-label:selected,
 .date-ranger .date-label:today:selected,
 .date-ranger .date-label:saturday:selected,
 .date-ranger .date-label:sunday:selected,
 .date-ranger .date-label:saturday:today:selected,
 .date-ranger .date-label:sunday:today:selected {
-    -fx-border-color    : -selected-border;
-    -fx-background-color: -selected-fill;
-    -fx-text-fill       : -selected-text-fill;
-    -fx-font-weight     : 500;
+    -fx-border-insets    : 2 2 2 2;
+    -fx-border-color     : -selected-border;
+    -fx-border-radius    : 5;
+    -fx-background-insets: 2 2 2 2;
+    -fx-background-radius: 5;
+    -fx-background-color : -selected-fill;
+    -fx-text-fill        : -selected-text-fill;
+    -fx-font-weight      : 700;
+    -fx-alignment        : center;
 }
+
+

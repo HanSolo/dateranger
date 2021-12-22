@@ -25,6 +25,7 @@ public class DateLabel extends Label {
     private              BooleanProperty range;
 
 
+    // ******************** Constructors **************************************
     public DateLabel() {
         super();
         init();
@@ -39,6 +40,7 @@ public class DateLabel extends Label {
     }
 
 
+    // ******************** Initialization ************************************
     private void init() {
         getStyleClass().addAll("date-ranger", "date-label");
 
@@ -80,6 +82,7 @@ public class DateLabel extends Label {
     }
 
 
+    // ******************** Methods *******************************************
     public boolean isToday() { return today.get(); }
     public void setToday(final boolean today) { this.today.set(today); }
     public BooleanProperty todayProperty() { return today; }
