@@ -14,6 +14,7 @@ which means if you would like to have a label that shows the current month with 
 and some buttons to switch between months you either can create your own ones or use
 the DateRangerControl which creates exactly this control that you see on the screenshots 
 below.
+
 Selected date:
 
 ![SelectedDate](https://i.ibb.co/tsMbYbq/Date-Ranger-1.png)
