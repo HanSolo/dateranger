@@ -792,6 +792,7 @@ public class DateRanger extends Region {
         }
 
         // Colorize current day of week
+        currentDate = LocalDate.of(currentYear.get(), currentMonth.get().getValue(), 1);
         for (int x = 1 ; x < 8 ; x++) {
             Optional<Node> optNode = getCellAt(x, 0);
             if (optNode.isPresent()) {

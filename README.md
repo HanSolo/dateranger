@@ -20,6 +20,7 @@ Selected date:
 ![SelectedDate](https://i.ibb.co/tsMbYbq/Date-Ranger-1.png)
 
 Selected range:
+If you hold down the `SHIFT` key, you can select a range of dates.
 
 ![SelectedRange](https://i.ibb.co/7WbrqKm/Date-Ranger-2.png)
 
