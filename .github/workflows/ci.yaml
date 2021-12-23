@@ -20,6 +20,8 @@ jobs:
         uses: foojayio/setup-java@disco
         with:
           java-version: ${{ matrix.java }}
+      - name: java -version
+        run: java -version
       - name: Import GPG Key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v3
